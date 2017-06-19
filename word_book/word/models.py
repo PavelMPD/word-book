@@ -32,6 +32,8 @@ class SpeechPart(models.Model):
         verbose_name=_("Part of Speech"), max_length=50, blank=False,
         choices=TYPE_CHOICES)
     word = models.ForeignKey(to="Word", on_delete=models.CASCADE, blank=False)
+    transcription = models.CharField(
+        verbose_name=_("Transcription"), max_length=1024, blank=True, null=True)
 
     class Meta:
         unique_together = ("name", "word")
@@ -41,3 +43,5 @@ class Meaning(models.Model):
     value = models.TextField(verbose_name="Meaning", blank=False)
     speech_part = models.ForeignKey(
         to="SpeechPart", on_delete=models.CASCADE, blank=False)
+    translation = models.CharField(
+        _("Translation"), max_length=1024, blank=True, null=True)
