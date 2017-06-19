@@ -6,6 +6,12 @@ class Word(models.Model):
     name = models.CharField(
         verbose_name=_("Word"), max_length=1024, primary_key=True)
 
+    class Meta:
+        ordering = ("name", )
+
+    def __str__(self):
+        return self.name
+
 
 class SpeechPart(models.Model):
     NOUN = "noun"
@@ -37,6 +43,10 @@ class SpeechPart(models.Model):
 
     class Meta:
         unique_together = ("name", "word")
+        ordering = ("name", "word")
+
+    def __str__(self):
+        return "%s : %s" % (self.word, self.name)
 
 
 class Meaning(models.Model):
@@ -45,3 +55,9 @@ class Meaning(models.Model):
         to="SpeechPart", on_delete=models.CASCADE, blank=False)
     translation = models.CharField(
         _("Translation"), max_length=1024, blank=True, null=True)
+
+    class Meta:
+        ordering = ("id", )
+
+    def __str__(self):
+        return self.value
