@@ -50,7 +50,7 @@ class SpeechPart(models.Model):
 
 
 class Meaning(models.Model):
-    value = models.TextField(verbose_name="Meaning", blank=False)
+    value = models.TextField(verbose_name=_("Meaning"), blank=False)
     speech_part = models.ForeignKey(
         to="SpeechPart", on_delete=models.CASCADE, blank=False)
     translation = models.CharField(
@@ -58,6 +58,15 @@ class Meaning(models.Model):
 
     class Meta:
         ordering = ("id", )
+
+    def __str__(self):
+        return self.value
+
+
+class Example(models.Model):
+    value = models.TextField(verbose_name=_("Example"), blank=False)
+    meaning = models.ForeignKey(
+        to="Meaning", on_delete=models.CASCADE, blank=False)
 
     def __str__(self):
         return self.value
