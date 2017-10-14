@@ -36,4 +36,5 @@ class TxtParser(object):
 
 if __name__ == '__main__':
     parser = TxtParser('./data/word list 20171013.txt')
-    parser.parse()
+    for o in parser.parse():
+        print(o)
